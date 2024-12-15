@@ -12,11 +12,26 @@
                     [routerLink]="['/users']"
                     [state]="{users, paginator}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/users/create']">New User</a>
-                </li>
+                @if(admin){
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/users/create']">New User</a>
+                    </li>
+                }
                
             </ul>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAuth">
+            <span class="nav-item nav-link text-primary mx-3">
+                @if(login.isAuth){
+                    {{ login.user.username }}
+                    <button
+                    (click)="handlerLogout()"
+                    class="btn btn-outline-success">Logout</button>
+                } @else {
+                    <a class="btn btn-outline-primary"
+                    [routerLink]="['/login']">Sign In</a>
+                }
+            </span>
         </div>
     </div>
 </nav>
